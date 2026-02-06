@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6d4waa8vohjv"]
+
+[ext_resource type="Script" uid="uid://dknmxdfvnpivm" path="res://MenusScripts/ControlsMenu.gd" id="1_2epfj"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2epfj")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 34.0
+offset_right = 637.0
+offset_bottom = 73.0
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 118.0
+offset_right = 626.0
+offset_bottom = 160.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

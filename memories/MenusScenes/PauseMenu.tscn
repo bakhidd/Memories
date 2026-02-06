@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cuwlb204ygt3w"]
+
+[ext_resource type="Script" uid="uid://b2nbgv37whj7v" path="res://MenusScripts/PauseMenu.gd" id="1_6xxwp"]
+
+[node name="SettingsMenu" type="Control" unique_id=597736606]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6xxwp")
+
+[node name="Label" type="Label" parent="." unique_id=777294010]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 76.0
+offset_right = 712.0
+offset_bottom = 116.0
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1633118030]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -97.0
+offset_right = 125.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1100496646]
+layout_mode = 2
+text = "Continue
+"
+
+[node name="ControlsButton" type="Button" parent="VBoxContainer" unique_id=1488837444]
+layout_mode = 2
+text = "Controls"
+
+[node name="AudioButton" type="Button" parent="VBoxContainer" unique_id=1117436396]
+layout_mode = 2
+text = "Audio"
+
+[node name="GraphicsButton" type="Button" parent="VBoxContainer" unique_id=1150563989]
+layout_mode = 2
+text = "Graphics"
+
+[node name="ExitToMainMenuButton" type="Button" parent="VBoxContainer" unique_id=311748801]
+layout_mode = 2
+text = "Exit to Main Menu
+"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=283333107]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AudioButton" to="." method="_on_audio_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/GraphicsButton" to="." method="_on_graphics_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitToMainMenuButton" to="." method="_on_exit_to_main_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
