@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dcxq50k2b0n53"]
+
+[ext_resource type="Texture2D" uid="uid://6gi78hs2knto" path="res://Assets/Top_Down_Survivor/Top_Down_Survivor/knife/idle/survivor-idle_knife_0.png" id="1_ljm46"]
+[ext_resource type="Script" uid="uid://t78xt2ywn476" path="res://Scripts/Episode1Scripts/player.gd" id="1_v0nlj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0nlj"]
+radius = 20.0
+
+[node name="Player" type="CharacterBody2D" unique_id=69418541]
+script = ExtResource("1_v0nlj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1012239120]
+scale = Vector2(0.3816964, 0.38169643)
+texture = ExtResource("1_ljm46")
+
+[node name="GunTip" type="Marker2D" parent="Sprite2D" unique_id=1549869265]
+position = Vector2(80, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=966182914]
+position = Vector2(-15, 6)
+shape = SubResource("CircleShape2D_v0nlj")

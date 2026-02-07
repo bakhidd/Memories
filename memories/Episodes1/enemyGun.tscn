@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c5cydmp48is6l"]
+
+[ext_resource type="Script" uid="uid://hu7hljqwoosj" path="res://Scripts/Episode1Scripts/enemy_general.gd" id="1_7xwla"]
+[ext_resource type="Texture2D" uid="uid://dm4b85rwggfhg" path="res://Assets/survivor character v4.2 spritesheet.png" id="1_t84ph"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xwla"]
+radius = 20.024984
+
+[node name="EnemyGun" type="CharacterBody2D" unique_id=819723160]
+script = ExtResource("1_7xwla")
+speed = 120.0
+health = 80
+fire_rate = 0.6
+bullet_speed = 450.0
+spread = 0.08
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=703039487]
+texture = ExtResource("1_t84ph")
+region_enabled = true
+region_rect = Rect2(66.52668, 10.8077755, 59.381187, 53.5879)
+
+[node name="ShootPoint" type="Marker2D" parent="Sprite2D" unique_id=679143846]
+position = Vector2(14, -21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=150423951]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_7xwla")

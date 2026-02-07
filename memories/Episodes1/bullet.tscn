@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cr4rwdr0wurg0"]
+
+[ext_resource type="Script" uid="uid://gwr2l1dxpkvq" path="res://Scripts/Episode1Scripts/bullet.gd" id="1_4xu7r"]
+[ext_resource type="Texture2D" uid="uid://u6arvr3lcy0r" path="res://Assets/New_All_Fire_Bullet_Pixel_16x16/All_Fire_Bullet_Pixel_16x16_00.png" id="1_tc1fd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4xu7r"]
+radius = 4.997583
+height = 27.99992
+
+[node name="Bullet" type="Area2D" unique_id=793095680]
+z_index = 10
+z_as_relative = false
+script = ExtResource("1_4xu7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=720265102]
+scale = Vector2(2.3181818, 2.3181818)
+texture = ExtResource("1_tc1fd")
+region_enabled = true
+region_rect = Rect2(253.57263, 131.14285, 18.280823, 11.099091)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280443005]
+position = Vector2(5.000002, 0)
+rotation = 1.5731982
+shape = SubResource("CapsuleShape2D_4xu7r")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=363312810]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
