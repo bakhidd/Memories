@@ -18,13 +18,14 @@ burst_count = 3
 burst_delay = 0.08
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=483229922]
+rotation = 1.5707964
 texture = ExtResource("1_ot3te")
 region_enabled = true
 region_rect = Rect2(194.76068, 1.1554852, 57.93286, 63.14682)
 
-[node name="ShootPoint" type="Marker2D" parent="Sprite2D" unique_id=1007906380]
-position = Vector2(10, -31)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1127443719]
-position = Vector2(0, 9)
+position = Vector2(-9, 0)
 shape = SubResource("CircleShape2D_sstg1")
+
+[node name="ShootPoint" type="Marker2D" parent="." unique_id=1007906380]
+position = Vector2(32, 9)

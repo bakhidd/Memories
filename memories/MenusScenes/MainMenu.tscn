@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4bra54ckncn4"]
+[gd_scene format=3 uid="uid://c4bra54ckncn4"]
 
 [ext_resource type="Script" uid="uid://dulokh2vuud6a" path="res://MenusScripts/MainMenu.gd" id="1_3g1k1"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1417310339]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,47 +11,39 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3g1k1")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -32.0
-offset_top = 157.0
-offset_right = 33.0
-offset_bottom = 180.0
-grow_horizontal = 2
-text = "SOMNIA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=343026819]
 layout_mode = 0
 offset_left = 485.0
 offset_top = 271.0
 offset_right = 702.0
 offset_bottom = 475.0
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=460429455]
+layout_mode = 2
+text = "The First Meeting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=2090266853]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+[node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=282287540]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Start Game"
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=205078023]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Continue"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1377872011]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1103327968]
 layout_mode = 2
 size_flags_vertical = 4
 text = "Exit"

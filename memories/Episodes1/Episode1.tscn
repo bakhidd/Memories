@@ -1,18 +1,19 @@
-[gd_scene format=3 uid="uid://bvhs5rh6xsmvw"]
+[gd_scene format=4 uid="uid://bvhs5rh6xsmvw"]
 
 [ext_resource type="Script" uid="uid://d1q48qf3ibdt" path="res://Scripts/Episode1Scripts/Episode1.gd" id="1_vhxvk"]
 [ext_resource type="Texture2D" uid="uid://bil4c7yo43mru" path="res://Assets/ChatGPT Image 6 февр. 2026 г., 17_51_36.png" id="2_lph3f"]
 [ext_resource type="Texture2D" uid="uid://c21x0kkt2iatk" path="res://Assets/ChatGPT Image 6 февр. 2026 г., 18_28_21.png" id="3_m200w"]
 [ext_resource type="PackedScene" uid="uid://dcxq50k2b0n53" path="res://Episodes1/player.tscn" id="6_j64ve"]
-[ext_resource type="Texture2D" uid="uid://dm4b85rwggfhg" path="res://Assets/survivor character v4.2 spritesheet.png" id="7_xls78"]
+[ext_resource type="PackedScene" uid="uid://gfwnlw4lcqty" path="res://Episodes1/enemySMG.tscn" id="6_u3sgc"]
+[ext_resource type="PackedScene" uid="uid://c5cydmp48is6l" path="res://Episodes1/enemyGun.tscn" id="7_r0rm7"]
+[ext_resource type="PackedScene" uid="uid://00h5j16d28pb" path="res://Episodes1/enemyRifle.tscn" id="8_t7vja"]
+[ext_resource type="PackedScene" uid="uid://d2ocl0le25pc3" path="res://Episodes1/enemyShotgun.tscn" id="9_u1s8j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m200w"]
 texture = ExtResource("2_lph3f")
 texture_region_size = Vector2i(32, 32)
 5:1/size_in_atlas = Vector2i(5, 4)
 5:1/0 = 0
-10:1/size_in_atlas = Vector2i(5, 4)
-10:1/0 = 0
 15:1/size_in_atlas = Vector2i(5, 4)
 15:1/0 = 0
 20:1/size_in_atlas = Vector2i(5, 4)
@@ -73,6 +74,10 @@ texture_region_size = Vector2i(32, 32)
 5:23/0 = 0
 27:17/size_in_atlas = Vector2i(15, 14)
 27:17/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+10:1/size_in_atlas = Vector2i(5, 4)
+10:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_g754g"]
 tile_size = Vector2i(32, 32)
@@ -283,48 +288,39 @@ size = Vector2(28.5625, 178.90625)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0rm7"]
 size = Vector2(64.75, 103.984375)
 
-[sub_resource type="GDScript" id="GDScript_58rg8"]
-script/source = "extends CharacterBody2D
-
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
-
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_u3sgc"]
-radius = 18.027756
-
 [node name="Episode1" type="Node2D" unique_id=1750076586]
 script = ExtResource("1_vhxvk")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1209619278]
-position = Vector2(11, 602)
-tile_set = SubResource("TileSet_g754g")
 
 [node name="Map" type="Sprite2D" parent="." unique_id=1881598065]
 position = Vector2(623, 17.000015)
 scale = Vector2(1.2421875, 1.2421875)
 texture = ExtResource("3_m200w")
+
+[node name="Map2" type="Sprite2D" parent="." unique_id=1729643754]
+position = Vector2(623, 1288.0001)
+rotation = 3.1415927
+scale = Vector2(1.2421875, 1.2421875)
+texture = ExtResource("3_m200w")
+
+[node name="Map3" type="Sprite2D" parent="." unique_id=1810202261]
+position = Vector2(2528.0002, 31.000002)
+scale = Vector2(1.2421875, 1.2421875)
+texture = ExtResource("3_m200w")
+
+[node name="Map4" type="Sprite2D" parent="." unique_id=142805599]
+position = Vector2(623, -1254)
+scale = Vector2(1.2421875, 1.2421875)
+texture = ExtResource("3_m200w")
+
+[node name="Map5" type="Sprite2D" parent="." unique_id=1432388102]
+position = Vector2(-1285, 31)
+scale = Vector2(1.2421875, 1.2421875)
+texture = ExtResource("3_m200w")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1209619278]
+position = Vector2(11, 602)
+tile_map_data = PackedByteArray("AAARAPL/AwATAAYAAADz/wIAAwAUABEAAADz/wUAAwAgAAsAAADy/wUAAwAgAAsAAAD0/9n/AwAcAAsAAADy/9n/AwAcAAsAAADz/9f/AwAcAAsAAADx/9f/AwAWAAYAAAAyANj/AwAUABEAAAAyANb/AwAJAAsAAAAyAAMAAwAdAAEAAADv/wMAAwARAAsAAADr/wMAAwAWAAsAAADv/wYAAwAKAAEAAADr/wYAAwAKAAEAAADu/9j/AwAKAAEAAADv/9X/AwAKAAEAAADw/9T/AwAKAAEAAADz/9T/AwAKAAEAAADr/9X/AwAKAAEAAADq/9j/AwAKAAEAAAA2ANj/AwAKAAEAAAA1ANb/AwANAAsAAAA4ANb/AwAJAAsAAAA8ANb/AwAWAAsAAAA3ANn/AwANABcAAAAyAAYAAwAJAAsAAAA1AAYAAwAJAAsAAAA1AAIAAwAUABcAAAA1AAQAAwANABcAAAA5AAMAAwAlAAsAAAA4AAYAAwARAAsAAAA=")
+tile_set = SubResource("TileSet_g754g")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2138796648]
 
@@ -349,7 +345,6 @@ shape = SubResource("RectangleShape2D_g754g")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=2016637310]
 position = Vector2(-91.75, 326.25)
 shape = SubResource("RectangleShape2D_58rg8")
-one_way_collision = true
 one_way_collision_margin = 0.0
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1860544688]
@@ -713,19 +708,6 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Inventory"
 
-[node name="EnemyPistol" type="CharacterBody2D" parent="." unique_id=1821499423]
-visible = false
-script = SubResource("GDScript_58rg8")
-
-[node name="Sprite2D" type="Sprite2D" parent="EnemyPistol" unique_id=1935544188]
-texture = ExtResource("7_xls78")
-region_enabled = true
-region_rect = Rect2(69.18977, 11.370342, 52.25544, 54.48586)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyPistol" unique_id=1265751458]
-position = Vector2(-4, 4)
-shape = SubResource("CircleShape2D_u3sgc")
-
 [node name="Node2D" type="Node2D" parent="." unique_id=584930125]
 
 [node name="Player" parent="." unique_id=476318058 instance=ExtResource("6_j64ve")]
@@ -733,5 +715,84 @@ position = Vector2(177, 549)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1149586456]
 zoom = Vector2(2, 2)
+
+[node name="EnemySmg" parent="." unique_id=1886681916 instance=ExtResource("6_u3sgc")]
+position = Vector2(452, -238)
+rotation = -4.712389
+
+[node name="EnemySmg2" parent="." unique_id=1761135019 instance=ExtResource("6_u3sgc")]
+position = Vector2(232, -409)
+rotation = -4.4505897
+
+[node name="EnemySmg3" parent="." unique_id=2043610133 instance=ExtResource("6_u3sgc")]
+position = Vector2(826.0001, -190.00002)
+rotation = -6.021386
+
+[node name="EnemySmg4" parent="." unique_id=1304697181 instance=ExtResource("6_u3sgc")]
+position = Vector2(1105.9999, 211.99998)
+rotation = -4.712389
+
+[node name="EnemySmg5" parent="." unique_id=2091434922 instance=ExtResource("6_u3sgc")]
+position = Vector2(-186, 212)
+rotation = -6.2831855
+
+[node name="EnemyGun" parent="." unique_id=819723160 instance=ExtResource("7_r0rm7")]
+position = Vector2(-78, 4)
+
+[node name="EnemyGun2" parent="." unique_id=1252635089 instance=ExtResource("7_r0rm7")]
+position = Vector2(674.00006, -437.00006)
+rotation = 0.7853982
+
+[node name="EnemyGun3" parent="." unique_id=1804462052 instance=ExtResource("7_r0rm7")]
+position = Vector2(1337.0001, 353.00006)
+rotation = 3.403392
+
+[node name="EnemyRifle" parent="." unique_id=679820151 instance=ExtResource("8_t7vja")]
+position = Vector2(-117, -133)
+rotation = 0.5235988
+
+[node name="EnemyShotgun" parent="." unique_id=2117975267 instance=ExtResource("9_u1s8j")]
+position = Vector2(505, 108)
+rotation = -5.2359877
+
+[node name="EnemyShotgun2" parent="." unique_id=803542195 instance=ExtResource("9_u1s8j")]
+position = Vector2(41, -343)
+rotation = -6.2831855
+
+[node name="EnemyShotgun3" parent="." unique_id=927883662 instance=ExtResource("9_u1s8j")]
+position = Vector2(560, -324)
+rotation = -6.2831855
+
+[node name="EnemyShotgun4" parent="." unique_id=87958239 instance=ExtResource("9_u1s8j")]
+position = Vector2(1243, -100)
+rotation = -4.4505897
+
+[node name="EnemyShotgun5" parent="." unique_id=1862678513 instance=ExtResource("9_u1s8j")]
+position = Vector2(966, 427.00003)
+rotation = -4.4505897
+
+[node name="EnemyRifle2" parent="." unique_id=1469276985 instance=ExtResource("8_t7vja")]
+position = Vector2(-56.000015, -431)
+rotation = 0.5235988
+
+[node name="EnemyRifle3" parent="." unique_id=327666947 instance=ExtResource("8_t7vja")]
+position = Vector2(650, 31.000015)
+rotation = -1.8325958
+
+[node name="EnemyRifle4" parent="." unique_id=1070115516 instance=ExtResource("8_t7vja")]
+position = Vector2(326, -431)
+rotation = 0.2617994
+
+[node name="EnemyRifle5" parent="." unique_id=397535608 instance=ExtResource("8_t7vja")]
+position = Vector2(1292.0001, 22.000092)
+rotation = 0.2617994
+
+[node name="EnemyRifle6" parent="." unique_id=482511876 instance=ExtResource("8_t7vja")]
+position = Vector2(1090.0001, 2.670288e-05)
+rotation = 1.5707964
+
+[node name="EnemyRifle7" parent="." unique_id=1823043908 instance=ExtResource("8_t7vja")]
+position = Vector2(1117, -176)
+rotation = 1.0471976
 
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

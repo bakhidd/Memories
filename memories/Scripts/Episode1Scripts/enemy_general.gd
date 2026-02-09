@@ -17,20 +17,26 @@ extends CharacterBody2D
 var player: Node2D = null
 var can_shoot = true
 var bullet_scene = preload("res://Episodes1/bullet.tscn")
+var shoot_point: Marker2D = null
 
 @onready var sprite = $Sprite2D
-@onready var shoot_point = $ShootPoint
 
 func _ready():
 	# Ищем игрока
 	player = get_tree().get_first_node_in_group("player")
 	
-	# Создаём точку выстрела, если её нет
+	if not player:
+		print("⚠️ Игрок не найден!")
+	
+	# Ищем ShootPoint
+	shoot_point = find_child("ShootPoint", true, false)
+	
 	if not shoot_point:
 		shoot_point = Marker2D.new()
 		shoot_point.name = "ShootPoint"
 		shoot_point.position = Vector2(40, 0)
 		add_child(shoot_point)
+		print("✅ ShootPoint создан для ", name)
 
 func _physics_process(delta):
 	if not player:
@@ -40,8 +46,9 @@ func _physics_process(delta):
 	
 	# Обнаружение игрока
 	if distance_to_player < detection_range:
-		# Поворачиваемся к игроку
-		sprite.rotation = (player.global_position - global_position).angle()
+		# ПОВОРАЧИВАЕМ ВЕСЬ УЗЕЛ (CharacterBody2D), а не только спрайт!
+		# Это повернёт и спрайт, и ShootPoint вместе
+		rotation = (player.global_position - global_position).angle()
 		
 		# Движемся к игроку, если далеко
 		if distance_to_player > attack_range:
@@ -55,11 +62,20 @@ func _physics_process(delta):
 				shoot()
 
 func shoot():
+	if not shoot_point:
+		print("❌ ShootPoint не найден у ", name)
+		return
+		
 	can_shoot = false
 	
 	# Стреляем очередью
 	for i in range(burst_count):
+		# Поворачиваемся к игроку перед КАЖДЫМ выстрелом
+		if player:
+			rotation = (player.global_position - global_position).angle()
+		
 		_spawn_bullet()
+		
 		if i < burst_count - 1:
 			await get_tree().create_timer(burst_delay).timeout
 	
@@ -68,6 +84,9 @@ func shoot():
 	can_shoot = true
 
 func _spawn_bullet():
+	if not shoot_point:
+		return
+		
 	var bullet = bullet_scene.instantiate()
 	
 	# Направление с разбросом

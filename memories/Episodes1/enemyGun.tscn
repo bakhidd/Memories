@@ -14,14 +14,15 @@ fire_rate = 0.6
 bullet_speed = 450.0
 spread = 0.08
 
+[node name="ShootPoint" type="Marker2D" parent="." unique_id=679143846]
+position = Vector2(22, 14)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=703039487]
+rotation = 1.5707964
 texture = ExtResource("1_t84ph")
 region_enabled = true
 region_rect = Rect2(66.52668, 10.8077755, 59.381187, 53.5879)
 
-[node name="ShootPoint" type="Marker2D" parent="Sprite2D" unique_id=679143846]
-position = Vector2(14, -21)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=150423951]
-position = Vector2(0, 6)
+position = Vector2(-5, 0)
 shape = SubResource("CircleShape2D_7xwla")

@@ -16,11 +16,12 @@ bullet_damage = 8
 spread = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1116330395]
+rotation = 1.5707964
 texture = ExtResource("1_igghw")
 
-[node name="ShootPoint" type="Marker2D" parent="Sprite2D" unique_id=618973967]
-position = Vector2(9, -32)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1025757479]
-position = Vector2(0, 9)
+position = Vector2(-10, 0)
 shape = SubResource("CircleShape2D_vf272")
+
+[node name="ShootPoint" type="Marker2D" parent="." unique_id=618973967]
+position = Vector2(32, 9)
