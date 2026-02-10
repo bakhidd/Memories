@@ -696,18 +696,6 @@ offset_right = 60.0
 offset_bottom = 31.0
 text = "Pause"
 
-[node name="InventoryButton" type="Button" parent="CanvasLayer" unique_id=57424897]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -83.0
-offset_top = -31.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Inventory"
-
 [node name="Node2D" type="Node2D" parent="." unique_id=584930125]
 
 [node name="Player" parent="." unique_id=476318058 instance=ExtResource("6_j64ve")]

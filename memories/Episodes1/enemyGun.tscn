@@ -6,23 +6,23 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwla"]
 radius = 20.024984
 
-[node name="EnemyGun" type="CharacterBody2D" unique_id=819723160]
+[node name="EnemyGun" type="CharacterBody2D" unique_id=819723160 groups=["enemies"]]
 script = ExtResource("1_7xwla")
 speed = 120.0
-health = 80
 fire_rate = 0.6
 bullet_speed = 450.0
 spread = 0.08
+burst_delay = 0.01
 
 [node name="ShootPoint" type="Marker2D" parent="." unique_id=679143846]
-position = Vector2(22, 14)
+position = Vector2(-14, 21)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=703039487]
-rotation = 1.5707964
+rotation = 3.1415927
 texture = ExtResource("1_t84ph")
 region_enabled = true
 region_rect = Rect2(66.52668, 10.8077755, 59.381187, 53.5879)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=150423951]
-position = Vector2(-5, 0)
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_7xwla")

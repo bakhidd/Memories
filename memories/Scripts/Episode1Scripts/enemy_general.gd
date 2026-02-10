@@ -2,31 +2,37 @@ extends CharacterBody2D
 
 # Параметры врага
 @export var speed: float = 150.0
-@export var health: int = 100
+@export var max_health: int = 100
 @export var detection_range: float = 500.0
 @export var attack_range: float = 400.0
 
-# Параметры оружия (настраиваются для каждого типа врага)
-@export var fire_rate: float = 0.5  # Задержка между выстрелами
+# Параметры оружия
+@export var fire_rate: float = 0.5
 @export var bullet_speed: float = 400
 @export var bullet_damage: int = 10
-@export var spread: float = 0.05  # Разброс в радианах
-@export var burst_count: int = 1  # Количество пуль за выстрел
-@export var burst_delay: float = 0.1  # Задержка между пулями в очереди
+@export var spread: float = 0.05
+@export var burst_count: int = 1
+@export var burst_delay: float = 0.1
 
+# Коррекция угла спрайта
+@export var sprite_offset_angle: float = -PI/2
+
+var current_health: int = 100
 var player: Node2D = null
 var can_shoot = true
 var bullet_scene = preload("res://Episodes1/bullet.tscn")
 var shoot_point: Marker2D = null
+var raycast: RayCast2D = null
+var health_bar: ProgressBar = null
 
-@onready var sprite = $Sprite2D
+@onready var sprite = $Sprite2D if has_node("Sprite2D") else null
 
 func _ready():
+	# Устанавливаем начальное здоровье
+	current_health = max_health
+	add_to_group("enemies") 
 	# Ищем игрока
 	player = get_tree().get_first_node_in_group("player")
-	
-	if not player:
-		print("⚠️ Игрок не найден!")
 	
 	# Ищем ShootPoint
 	shoot_point = find_child("ShootPoint", true, false)
@@ -36,43 +42,81 @@ func _ready():
 		shoot_point.name = "ShootPoint"
 		shoot_point.position = Vector2(40, 0)
 		add_child(shoot_point)
-		print("✅ ShootPoint создан для ", name)
+	
+	# Создаём RayCast2D для проверки линии видимости
+	raycast = RayCast2D.new()
+	raycast.name = "VisionRaycast"
+	raycast.enabled = true
+	raycast.collide_with_areas = false
+	raycast.collide_with_bodies = true
+	raycast.hit_from_inside = false
+	add_child(raycast)
+	
+	# Создаём health bar (маленький)
+	create_health_bar()
 
 func _physics_process(delta):
-	if not player:
+	if not player or player.current_health <= 0: 
+		velocity = Vector2.ZERO
 		return
 	
 	var distance_to_player = global_position.distance_to(player.global_position)
 	
 	# Обнаружение игрока
 	if distance_to_player < detection_range:
-		# ПОВОРАЧИВАЕМ ВЕСЬ УЗЕЛ (CharacterBody2D), а не только спрайт!
-		# Это повернёт и спрайт, и ShootPoint вместе
-		rotation = (player.global_position - global_position).angle()
+		# Проверяем линию видимости
+		var can_see_player = check_line_of_sight()
 		
-		# Движемся к игроку, если далеко
-		if distance_to_player > attack_range:
-			var direction = (player.global_position - global_position).normalized()
-			velocity = direction * speed
-			move_and_slide()
+		if can_see_player:
+			if sprite:
+				rotation = (player.global_position - global_position).angle() + sprite_offset_angle
+			
+			# Движемся к игроку, если далеко
+			if distance_to_player > attack_range:
+				var direction = (player.global_position - global_position).normalized()
+				velocity = direction * speed
+				move_and_slide()
+			else:
+				# Остановились и стреляем
+				velocity = Vector2.ZERO
+				if can_shoot:
+					shoot()
 		else:
-			# Остановились и стреляем
+			# Не видим игрока - останавливаемся
 			velocity = Vector2.ZERO
-			if can_shoot:
-				shoot()
+
+func check_line_of_sight() -> bool:
+	if not player or not raycast:
+		return false
+	
+	raycast.target_position = to_local(player.global_position)
+	raycast.force_raycast_update()
+	
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		if collider == player:
+			return true
+		else:
+			return false
+	
+	return true
 
 func shoot():
 	if not shoot_point:
-		print("❌ ShootPoint не найден у ", name)
+		return
+	
+	if not check_line_of_sight():
 		return
 		
 	can_shoot = false
 	
 	# Стреляем очередью
 	for i in range(burst_count):
-		# Поворачиваемся к игроку перед КАЖДЫМ выстрелом
-		if player:
-			rotation = (player.global_position - global_position).angle()
+		if not check_line_of_sight():
+			break
+		
+		if player and sprite:
+			rotation = (player.global_position - global_position).angle() + sprite_offset_angle
 		
 		_spawn_bullet()
 		
@@ -89,7 +133,6 @@ func _spawn_bullet():
 		
 	var bullet = bullet_scene.instantiate()
 	
-	# Направление с разбросом
 	var target_pos = player.global_position
 	var direction = (target_pos - shoot_point.global_position).normalized()
 	
@@ -101,20 +144,70 @@ func _spawn_bullet():
 	bullet.speed = bullet_speed
 	bullet.global_position = shoot_point.global_position
 	
+	# ВАЖНО: помечаем пулю как пулю врага
 	if "damage" in bullet:
 		bullet.damage = bullet_damage
+	if "is_enemy_bullet" in bullet:
+		bullet.is_enemy_bullet = true
 	
 	get_tree().root.add_child(bullet)
 
 func take_damage(damage: int):
-	health -= damage
-	# Эффект урона
+	current_health -= damage
+	current_health = max(0, current_health)
+	
+	print("💥 ", name, " получил урон ", damage, "! HP: ", current_health, "/", max_health)
+	
+	# Обновляем health bar
+	update_health_bar()
+	
+	# Эффект урона (красная вспышка)
 	modulate = Color.RED
 	await get_tree().create_timer(0.1).timeout
 	modulate = Color.WHITE
 	
-	if health <= 0:
+	# Проверяем смерть
+	if current_health <= 0:
 		die()
 
+func create_health_bar():
+	# Создаём ОЧЕНЬ МАЛЕНЬКИЙ ProgressBar
+	health_bar = ProgressBar.new()
+	health_bar.name = "HealthBar"
+	health_bar.size = Vector2(30, 4)  # Очень маленький!
+	health_bar.position = Vector2(-15, -40)  # Над головой врага
+	health_bar.max_value = max_health
+	health_bar.value = current_health
+	health_bar.show_percentage = false
+	
+	# Стиль для фона (тёмно-серый)
+	var bg_style = StyleBoxFlat.new()
+	bg_style.bg_color = Color(0.2, 0.2, 0.2)
+	health_bar.add_theme_stylebox_override("background", bg_style)
+	
+	# Стиль для заполнения (красный для врагов)
+	var fill_style = StyleBoxFlat.new()
+	fill_style.bg_color = Color(1, 0, 0)
+	health_bar.add_theme_stylebox_override("fill", fill_style)
+	
+	add_child(health_bar)
+
+func update_health_bar():
+	if health_bar:
+		health_bar.value = current_health
+		
+		# Меняем оттенок красного в зависимости от HP
+		var fill_style = StyleBoxFlat.new()
+		var health_percent = float(current_health) / float(max_health)
+		fill_style.bg_color = Color(1, health_percent * 0.3, 0)  # От тёмно-красного к оранжевому
+		health_bar.add_theme_stylebox_override("fill", fill_style)
+
 func die():
+	print("💀 ", name, " умер!")
+	
+	# Эффект смерти
+	modulate = Color(0.5, 0.5, 0.5)
+	
+	# Удаляемся через небольшую задержку
+	await get_tree().create_timer(0.3).timeout
 	queue_free()
