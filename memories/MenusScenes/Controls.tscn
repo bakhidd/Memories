@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6d4waa8vohjv"]
+[gd_scene format=3 uid="uid://b6d4waa8vohjv"]
 
-[ext_resource type="Script" uid="uid://dknmxdfvnpivm" path="res://MenusScripts/ControlsMenu.gd" id="1_2epfj"]
+[ext_resource type="Script" uid="uid://dknmxdfvnpivm" path="res://Scripts/MenusScripts/ControlsMenu.gd" id="1_2epfj"]
 
-[node name="Controls" type="Control"]
+[node name="Controls" type="Control" unique_id=429281054]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2epfj")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=431237472]
 layout_mode = 0
 offset_left = 412.0
 offset_top = 34.0
@@ -21,7 +21,7 @@ text = "Controls"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=1643187309]
 layout_mode = 0
 offset_left = 431.0
 offset_top = 118.0

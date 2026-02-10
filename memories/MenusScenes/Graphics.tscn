@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://nppohon3v7gw"]
+[gd_scene format=3 uid="uid://nppohon3v7gw"]
 
-[ext_resource type="Script" uid="uid://bslw3pen05blw" path="res://MenusScripts/GraphicsMenu.gd" id="1_2dk4r"]
-[ext_resource type="Texture2D" uid="uid://d1xa2ofcnjcxc" path="res://icon.svg" id="2_t15cd"]
+[ext_resource type="Script" uid="uid://bslw3pen05blw" path="res://Scripts/MenusScripts/GraphicsMenu.gd" id="1_2dk4r"]
+[ext_resource type="Texture2D" uid="uid://cdln2vrb8sfyq" path="res://icon.svg" id="2_t15cd"]
 
-[node name="Graphics" type="Control"]
+[node name="Graphics" type="Control" unique_id=514466294]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,19 +12,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2dk4r")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1533329651]
 layout_mode = 0
 offset_right = 1159.0
 offset_bottom = 657.0
 texture = ExtResource("2_t15cd")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=156981807]
 layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 646.0
 color = Color(0, 0, 0, 0.027451)
 
-[node name="ScreenLabel" type="Label" parent="."]
+[node name="ScreenLabel" type="Label" parent="." unique_id=266936172]
 layout_mode = 0
 offset_left = 327.0
 offset_top = 119.0
@@ -34,14 +34,14 @@ text = "Screen Format"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FullScreenButton" type="Button" parent="ScreenLabel"]
+[node name="FullScreenButton" type="Button" parent="ScreenLabel" unique_id=261747518]
 layout_mode = 0
 offset_left = 214.0
 offset_right = 306.0
 offset_bottom = 31.0
 text = "Full Screen"
 
-[node name="FullScreenButton2" type="Button" parent="ScreenLabel"]
+[node name="FullScreenButton2" type="Button" parent="ScreenLabel" unique_id=1089535713]
 layout_mode = 0
 offset_left = 321.0
 offset_top = 1.0
@@ -49,7 +49,7 @@ offset_right = 413.0
 offset_bottom = 32.0
 text = "Window"
 
-[node name="VSyncLabel" type="Label" parent="."]
+[node name="VSyncLabel" type="Label" parent="." unique_id=469622343]
 layout_mode = 0
 offset_left = 327.0
 offset_top = 164.0
@@ -59,7 +59,7 @@ text = "VSync"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OnButton" type="Button" parent="VSyncLabel"]
+[node name="OnButton" type="Button" parent="VSyncLabel" unique_id=1027463418]
 layout_mode = 0
 offset_left = 249.0
 offset_top = 1.0
@@ -67,7 +67,7 @@ offset_right = 306.0
 offset_bottom = 32.0
 text = "On"
 
-[node name="OffButton" type="Button" parent="VSyncLabel"]
+[node name="OffButton" type="Button" parent="VSyncLabel" unique_id=1693696296]
 layout_mode = 0
 offset_left = 322.0
 offset_top = 1.0
@@ -75,7 +75,7 @@ offset_right = 379.0
 offset_bottom = 32.0
 text = "Off"
 
-[node name="BrightnessLabel" type="Label" parent="."]
+[node name="BrightnessLabel" type="Label" parent="." unique_id=2095739589]
 layout_mode = 0
 offset_left = 328.0
 offset_top = 205.0
@@ -85,7 +85,7 @@ text = "Brightness"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HScrollBar" type="HScrollBar" parent="BrightnessLabel"]
+[node name="HScrollBar" type="HScrollBar" parent="BrightnessLabel" unique_id=103680061]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 9.0
@@ -95,7 +95,7 @@ min_value = -1.0
 max_value = 1.0
 step = 0.01
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=202122439]
 layout_mode = 0
 offset_left = 501.0
 offset_top = 27.0
@@ -105,7 +105,7 @@ text = "Graphics"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=1567840667]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -120,7 +120,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[node name="ApplyButton" type="Button" parent="."]
+[node name="ApplyButton" type="Button" parent="." unique_id=116556757]
 layout_mode = 0
 offset_left = 515.0
 offset_top = 549.0

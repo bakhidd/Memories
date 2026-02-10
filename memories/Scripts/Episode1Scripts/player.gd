@@ -9,6 +9,9 @@ var current_health: int = 100
 var can_heal: bool = true                # Флаг готовности способности
 var heal_bar_ui: ProgressBar = null # Ссылка на полоску кулдауна
 
+
+var quest_label: Label = null
+
 @onready var sprite = $Sprite2D
 @onready var gun_tip = $Sprite2D/GunTip if has_node("Sprite2D/GunTip") else null
 
@@ -203,6 +206,12 @@ func create_health_bar_ui():
 	heal_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	heal_label.add_theme_font_size_override("font_size", 12)
 	heal_bar_ui.add_child(heal_label)
+	
+	quest_label = Label.new()
+	quest_label.name = "QuestLabel"
+	quest_label.text = "Goal: Find the path to her heart..."
+	quest_label.position = Vector2(-200, -500) # Настрой позицию, чтобы было видно в углу
+	canvas_layer.add_child(quest_label)
 
 func update_health_bar():
 	if health_bar_ui:
@@ -243,3 +252,7 @@ func use_heal_ability():
 		# Возвращаем яркий цвет готовности
 		heal_bar_ui.get_theme_stylebox("fill").bg_color = Color(0, 0.6, 0.8, 0.8)
 	print("✅ Лечение снова доступно!")
+
+func update_quest(new_text: String):
+	if quest_label:
+		quest_label.text = "Goal: " + new_text

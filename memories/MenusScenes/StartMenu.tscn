@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b270a2rw61c0m"]
+[gd_scene format=3 uid="uid://b270a2rw61c0m"]
 
-[ext_resource type="Script" uid="uid://diicc5dw001du" path="res://MenusScripts/StartMenu.gd" id="1_xmy5p"]
+[ext_resource type="Script" uid="uid://diicc5dw001du" path="res://Scripts/MenusScripts/StartMenu.gd" id="1_xmy5p"]
 
-[node name="StartMenu" type="Control"]
+[node name="StartMenu" type="Control" unique_id=1975080908]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xmy5p")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1661854169]
 layout_mode = 0
 offset_left = 403.0
 offset_top = 53.0
@@ -21,7 +21,7 @@ text = "Episodes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Ep1Button" type="Button" parent="."]
+[node name="Ep1Button" type="Button" parent="." unique_id=1378147140]
 layout_mode = 0
 offset_left = 420.0
 offset_top = 121.0
@@ -29,7 +29,7 @@ offset_right = 704.0
 offset_bottom = 177.0
 text = "Episode 1"
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=388263025]
 layout_mode = 0
 offset_left = 459.0
 offset_top = 510.0
