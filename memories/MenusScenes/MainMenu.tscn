@@ -20,7 +20,7 @@ offset_bottom = 475.0
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=460429455]
 layout_mode = 2
-text = "The First Meeting"
+text = "Find Me"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -32,11 +32,6 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_vertical = 4
 text = "Start Game"
-
-[node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=205078023]
-layout_mode = 2
-size_flags_vertical = 4
-text = "Continue"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1377872011]
 layout_mode = 2

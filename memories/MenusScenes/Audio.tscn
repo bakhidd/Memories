@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cvu4ul0kh5grl" path="res://Scripts/MenusScripts/AudioMenu.gd" id="1_qhlfu"]
 
-[node name="Audio" type="Control"]
+[node name="Audio" type="Control" unique_id=386716939]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qhlfu")
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="." unique_id=2010756762]
 layout_mode = 0
 offset_left = 429.0
 offset_top = 31.0
@@ -21,7 +22,7 @@ text = "Audio"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="." unique_id=1401385252]
 layout_mode = 0
 offset_left = 407.0
 offset_top = 520.0
@@ -29,7 +30,7 @@ offset_right = 709.0
 offset_bottom = 573.0
 text = "Back"
 
-[node name="MasterVolumeLabel" type="Label" parent="."]
+[node name="MasterVolumeLabel" type="Label" parent="." unique_id=859797198]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 96.0
@@ -39,14 +40,14 @@ text = "Master Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MasterVolumeScrollBar" type="HScrollBar" parent="MasterVolumeLabel"]
+[node name="MasterVolumeScrollBar" type="HScrollBar" parent="MasterVolumeLabel" unique_id=776363995]
 layout_mode = 0
 offset_left = 198.0
 offset_top = 7.0
 offset_right = 485.0
 offset_bottom = 30.0
 
-[node name="MusicVolumeLabel2" type="Label" parent="."]
+[node name="MusicVolumeLabel2" type="Label" parent="." unique_id=39598299]
 layout_mode = 0
 offset_left = 231.0
 offset_top = 160.0
@@ -56,14 +57,14 @@ text = "Music Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicVolumeScrollBar" type="HScrollBar" parent="MusicVolumeLabel2"]
+[node name="MusicVolumeScrollBar" type="HScrollBar" parent="MusicVolumeLabel2" unique_id=171141041]
 layout_mode = 0
 offset_left = 198.0
 offset_top = 7.0
 offset_right = 485.0
 offset_bottom = 30.0
 
-[node name="SFXVolumeLabel3" type="Label" parent="."]
+[node name="SFXVolumeLabel3" type="Label" parent="." unique_id=617273835]
 layout_mode = 0
 offset_left = 231.0
 offset_top = 224.0
@@ -73,7 +74,7 @@ text = "SFX Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFXVolumeScrollBar" type="HScrollBar" parent="SFXVolumeLabel3"]
+[node name="SFXVolumeScrollBar" type="HScrollBar" parent="SFXVolumeLabel3" unique_id=685149374]
 layout_mode = 0
 offset_left = 198.0
 offset_top = 7.0

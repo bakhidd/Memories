@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b2nbgv37whj7v" path="res://Scripts/MenusScripts/PauseMenu.gd" id="1_6xxwp"]
 
 [node name="SettingsMenu" type="Control" unique_id=597736606]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,10 +45,6 @@ layout_mode = 2
 text = "Continue
 "
 
-[node name="ControlsButton" type="Button" parent="VBoxContainer" unique_id=1488837444]
-layout_mode = 2
-text = "Controls"
-
 [node name="AudioButton" type="Button" parent="VBoxContainer" unique_id=1117436396]
 layout_mode = 2
 text = "Audio"
@@ -66,7 +63,6 @@ layout_mode = 2
 text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/AudioButton" to="." method="_on_audio_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/GraphicsButton" to="." method="_on_graphics_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitToMainMenuButton" to="." method="_on_exit_to_main_menu_button_pressed"]

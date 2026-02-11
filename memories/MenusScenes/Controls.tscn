@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dknmxdfvnpivm" path="res://Scripts/MenusScripts/ControlsMenu.gd" id="1_2epfj"]
 
 [node name="Controls" type="Control" unique_id=429281054]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
