@@ -156,8 +156,6 @@ func take_damage(damage: int):
 	current_health -= damage
 	current_health = max(0, current_health)
 	
-	print("💥 ", name, " получил урон ", damage, "! HP: ", current_health, "/", max_health)
-	
 	# Обновляем health bar
 	update_health_bar()
 	
@@ -171,21 +169,24 @@ func take_damage(damage: int):
 		die()
 
 func create_health_bar():
-	# Создаём ОЧЕНЬ МАЛЕНЬКИЙ ProgressBar
 	health_bar = ProgressBar.new()
 	health_bar.name = "HealthBar"
-	health_bar.size = Vector2(30, 4)  # Очень маленький!
-	health_bar.position = Vector2(-15, -40)  # Над головой врага
+	
+	# ИЗМЕНЕНИЕ: Сделали уже (25 вместо 30) и тоньше (2 вместо 4)
+	health_bar.size = Vector2(25, 1) 
+	
+	# Центрируем над головой (смещение по X теперь -12.5, чтобы было ровно)
+	health_bar.position = Vector2(-12.5, -35) 
+	
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	health_bar.show_percentage = false
 	
-	# Стиль для фона (тёмно-серый)
+	# Оставляем стили как были 
 	var bg_style = StyleBoxFlat.new()
-	bg_style.bg_color = Color(0.2, 0.2, 0.2)
+	bg_style.bg_color = Color(0.1, 0.1, 0.1, 0.6) # Сделали чуть прозрачнее
 	health_bar.add_theme_stylebox_override("background", bg_style)
 	
-	# Стиль для заполнения (красный для врагов)
 	var fill_style = StyleBoxFlat.new()
 	fill_style.bg_color = Color(1, 0, 0)
 	health_bar.add_theme_stylebox_override("fill", fill_style)

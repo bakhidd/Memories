@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dc72e8ku118kn"]
+
+[ext_resource type="Texture2D" uid="uid://ufa5pod57lyo" path="res://Assets/Me.png" id="1_bl817"]
+[ext_resource type="Script" uid="uid://bfrhdf25y6akb" path="res://Scripts/Episode1Scripts/girl.gd" id="1_vijq5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vijq5"]
+radius = 88.0
+
+[node name="Girl" type="Area2D" unique_id=1009072995]
+process_mode = 3
+script = ExtResource("1_vijq5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=798450073]
+scale = Vector2(0.05822754, 0.058227543)
+texture = ExtResource("1_bl817")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1797796274]
+position = Vector2(-9, -1)
+shape = SubResource("CircleShape2D_vijq5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=25350739]
+layer = 10
+
+[node name="Flash" type="ColorRect" parent="CanvasLayer" unique_id=1515290738]
+visible = false
+offset_right = 1230.0
+offset_bottom = 717.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1269118908]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -143.0
+offset_right = 25.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.9600003, 1)
+mouse_filter = 2
+color = Color(0.47397572, 0.47397572, 0.47397572, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=394525931]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -134.0
+offset_right = 12.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.9600003, 1)
+mouse_filter = 2
+color = Color(0.5971761, 0.59717613, 0.597176, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1745638011]
+offset_left = 56.0
+offset_top = 530.0
+offset_right = 1143.0
+offset_bottom = 605.0
+scale = Vector2(0.9600003, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

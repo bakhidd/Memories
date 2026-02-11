@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c5cydmp48is6l" path="res://Episodes1/enemyGun.tscn" id="7_r0rm7"]
 [ext_resource type="PackedScene" uid="uid://00h5j16d28pb" path="res://Episodes1/enemyRifle.tscn" id="8_t7vja"]
 [ext_resource type="PackedScene" uid="uid://d2ocl0le25pc3" path="res://Episodes1/enemyShotgun.tscn" id="9_u1s8j"]
+[ext_resource type="PackedScene" uid="uid://dc72e8ku118kn" path="res://Episodes1/girl.tscn" id="9_u3sgc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m200w"]
 texture = ExtResource("2_lph3f")
@@ -782,5 +783,9 @@ rotation = 1.5707964
 [node name="EnemyRifle7" parent="." unique_id=1823043908 instance=ExtResource("8_t7vja")]
 position = Vector2(1117, -176)
 rotation = 1.0471976
+
+[node name="Girl" parent="." unique_id=1009072995 instance=ExtResource("9_u3sgc")]
+position = Vector2(1427, -431)
+rotation = 1.5707964
 
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

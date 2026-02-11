@@ -10,6 +10,10 @@ var can_heal: bool = true                # Флаг готовности спо�
 var heal_bar_ui: ProgressBar = null # Ссылка на полоску кулдауна
 
 
+@export var fire_rate: float = 0.2  # Задержка между выстрелами (меньше = быстрее)
+@export var rifle_damage: int = 25   # Увеличили урон (был 10 по умолчанию в пуле)
+var can_shoot_timer: bool = true
+
 var quest_label: Label = null
 
 @onready var sprite = $Sprite2D
@@ -49,31 +53,33 @@ func _physics_process(delta):
 		use_heal_ability()
 
 func shoot():
+	if not can_shoot_timer: return # Проверка скорострельности
+	
+	can_shoot_timer = false
 	var bullet = bullet_scene.instantiate()
 	
-	# Направление от игрока к мыши
 	var mouse_pos = get_global_mouse_position()
 	var shoot_direction = (mouse_pos - global_position).normalized()
 	
-	# Настраиваем пулю
 	bullet.direction = shoot_direction
+	# ПЕРЕДАЕМ ПОВЫШЕННЫЙ УРОН ПУЛЕ
+	if "damage" in bullet:
+		bullet.damage = rifle_damage 
 	
-	# Пули игрока НЕ помечаем как вражеские (по умолчанию is_enemy_bullet = false)
-	
-	# Спавним пулю в точке GunTip
 	if gun_tip:
 		bullet.global_position = gun_tip.global_position
 	else:
 		bullet.global_position = global_position + shoot_direction * 40
 	
-	# Добавляем пулю в корневую сцену
 	get_tree().root.add_child(bullet)
+	
+	# Таймер перезарядки между выстрелами
+	await get_tree().create_timer(fire_rate).timeout
+	can_shoot_timer = true
 
 func take_damage(damage: int):
 	current_health -= damage
 	current_health = max(0, current_health)
-	
-	print("💔 Игрок получил урон ", damage, "! HP: ", current_health, "/", max_health)
 	
 	# Обновляем health bar
 	update_health_bar()
@@ -91,7 +97,6 @@ func heal(amount: int):
 	current_health += amount
 	current_health = min(current_health, max_health)
 	update_health_bar()
-	print("💚 Игрок вылечился на ", amount, "! HP: ", current_health, "/", max_health)
 
 func die():
 	print("💀 ИГРОК УМЕР!")
@@ -210,7 +215,7 @@ func create_health_bar_ui():
 	quest_label = Label.new()
 	quest_label.name = "QuestLabel"
 	quest_label.text = "Goal: Find the path to her heart..."
-	quest_label.position = Vector2(-200, -500) # Настрой позицию, чтобы было видно в углу
+	quest_label.position = Vector2(20, 20) # Настрой позицию, чтобы было видно в углу
 	canvas_layer.add_child(quest_label)
 
 func update_health_bar():
@@ -251,7 +256,6 @@ func use_heal_ability():
 	if heal_bar_ui:
 		# Возвращаем яркий цвет готовности
 		heal_bar_ui.get_theme_stylebox("fill").bg_color = Color(0, 0.6, 0.8, 0.8)
-	print("✅ Лечение снова доступно!")
 
 func update_quest(new_text: String):
 	if quest_label:
