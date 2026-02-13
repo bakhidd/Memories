@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://vhathwjgyc8m" path="res://Assets/survivor_smg.png" id="1_igghw"]
 [ext_resource type="Script" uid="uid://hu7hljqwoosj" path="res://Scripts/Episode1Scripts/enemy_general.gd" id="1_vf272"]
+[ext_resource type="AudioStream" uid="uid://dwoai60hjrk5v" path="res://Sounds/Snake's Authentic Gun Sounds And More/Snake's Authentic Gun Sounds/Full Sound/5.56/WAV/556 Spray WAV.wav" id="3_jlnjg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vf272"]
 radius = 21.023796
@@ -9,10 +10,9 @@ radius = 21.023796
 [node name="EnemySmg" type="CharacterBody2D" unique_id=1886681916]
 script = ExtResource("1_vf272")
 speed = 140.0
-health = 90
 fire_rate = 0.12
 bullet_speed = 500.0
-bullet_damage = 8
+bullet_damage = 7
 spread = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1116330395]
@@ -25,3 +25,6 @@ shape = SubResource("CircleShape2D_vf272")
 
 [node name="ShootPoint" type="Marker2D" parent="." unique_id=618973967]
 position = Vector2(-10, 32)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1671096236]
+stream = ExtResource("3_jlnjg")

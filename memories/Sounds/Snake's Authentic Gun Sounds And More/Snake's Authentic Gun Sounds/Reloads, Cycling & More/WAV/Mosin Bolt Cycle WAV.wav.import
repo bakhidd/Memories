@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fntlvibgj6ku"
+path="res://.godot/imported/Mosin Bolt Cycle WAV.wav-ef9c0563fc67f3cba5554e6f737e0cd9.sample"
+
+[deps]
+
+source_file="res://Sounds/Snake's Authentic Gun Sounds And More/Snake's Authentic Gun Sounds/Reloads, Cycling & More/WAV/Mosin Bolt Cycle WAV.wav"
+dest_files=["res://.godot/imported/Mosin Bolt Cycle WAV.wav-ef9c0563fc67f3cba5554e6f737e0cd9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

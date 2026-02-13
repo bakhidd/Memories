@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnbky0cat1218"
+path="res://.godot/imported/556 Burst MP3.mp3-20bf777a3dcfe64dbbc0c18e7fe9e03b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Snake's Authentic Gun Sounds And More/Snake's Authentic Gun Sounds/Full Sound/5.56/MP3/556 Burst MP3.mp3"
+dest_files=["res://.godot/imported/556 Burst MP3.mp3-20bf777a3dcfe64dbbc0c18e7fe9e03b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

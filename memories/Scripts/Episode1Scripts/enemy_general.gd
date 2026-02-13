@@ -26,6 +26,7 @@ var raycast: RayCast2D = null
 var health_bar: ProgressBar = null
 
 @onready var sprite = $Sprite2D if has_node("Sprite2D") else null
+@onready var shoot_sound = $ShootSound 
 
 func _ready():
 	# Устанавливаем начальное здоровье
@@ -109,7 +110,7 @@ func shoot():
 		return
 		
 	can_shoot = false
-	
+	shoot_sound.play()
 	# Стреляем очередью
 	for i in range(burst_count):
 		if not check_line_of_sight():
@@ -204,7 +205,6 @@ func update_health_bar():
 		health_bar.add_theme_stylebox_override("fill", fill_style)
 
 func die():
-	print("💀 ", name, " умер!")
 	
 	# Эффект смерти
 	modulate = Color(0.5, 0.5, 0.5)

@@ -45,14 +45,6 @@ layout_mode = 2
 text = "Continue
 "
 
-[node name="AudioButton" type="Button" parent="VBoxContainer" unique_id=1117436396]
-layout_mode = 2
-text = "Audio"
-
-[node name="GraphicsButton" type="Button" parent="VBoxContainer" unique_id=1150563989]
-layout_mode = 2
-text = "Graphics"
-
 [node name="ExitToMainMenuButton" type="Button" parent="VBoxContainer" unique_id=311748801]
 layout_mode = 2
 text = "Exit to Main Menu
@@ -63,7 +55,5 @@ layout_mode = 2
 text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/AudioButton" to="." method="_on_audio_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/GraphicsButton" to="." method="_on_graphics_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitToMainMenuButton" to="." method="_on_exit_to_main_menu_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

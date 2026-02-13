@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bingwe074ngrq"
+path="res://.godot/imported/Mosin Bolt Cycle MP3.mp3-527b32eee89cdcd04e64c377077f7884.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Snake's Authentic Gun Sounds And More/Snake's Authentic Gun Sounds/Reloads, Cycling & More/MP3/Mosin Bolt Cycle MP3.mp3"
+dest_files=["res://.godot/imported/Mosin Bolt Cycle MP3.mp3-527b32eee89cdcd04e64c377077f7884.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

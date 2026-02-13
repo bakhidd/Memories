@@ -18,6 +18,8 @@ var quest_label: Label = null
 
 @onready var sprite = $Sprite2D
 @onready var gun_tip = $Sprite2D/GunTip if has_node("Sprite2D/GunTip") else null
+@onready var shoot_sound = $ShootSound 
+@onready var step_sound = $StepSound
 
 # Загружаем сцену пули
 var bullet_scene = preload("res://Episodes1/bullet.tscn")
@@ -41,6 +43,12 @@ func _physics_process(delta):
 	velocity = direction * SPEED
 	move_and_slide()
 	
+	if velocity.length() > 0: # Если игрок движется
+		if not step_sound.playing: # Если звук еще не играет
+			step_sound.play()
+	else: # Если игрок остановился
+		step_sound.stop()
+	
 	# Поворот к мыши
 	var mouse_pos = get_global_mouse_position()
 	sprite.rotation = (mouse_pos - global_position).angle()
@@ -54,7 +62,7 @@ func _physics_process(delta):
 
 func shoot():
 	if not can_shoot_timer: return # Проверка скорострельности
-	
+	shoot_sound.play()
 	can_shoot_timer = false
 	var bullet = bullet_scene.instantiate()
 	
@@ -99,7 +107,6 @@ func heal(amount: int):
 	update_health_bar()
 
 func die():
-	print("💀 ИГРОК УМЕР!")
 	sprite.modulate = Color(0.3, 0.3, 0.3)
 	set_physics_process(false)
 	
@@ -118,7 +125,7 @@ func show_death_screen():
 	panel.add_child(vbox)
 	
 	var label = Label.new()
-	label.text = "YOU DIED\nTry again"
+	label.text = "YOU DIED"
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(label)
 	
@@ -214,15 +221,14 @@ func create_health_bar_ui():
 	
 	quest_label = Label.new()
 	quest_label.name = "QuestLabel"
-	quest_label.text = "Goal: Find the path to her heart..."
-	quest_label.position = Vector2(20, 20) # Настрой позицию, чтобы было видно в углу
+	quest_label.text = "Goal: Find what matters most..."
+	quest_label.position = Vector2(20, 20) 
 	canvas_layer.add_child(quest_label)
 
 func update_health_bar():
 	if health_bar_ui:
 		health_bar_ui.value = current_health
 		
-		# Обновление цвета (ваш существующий код) [cite: 15]
 		var fill_style = health_bar_ui.get_theme_stylebox("fill") as StyleBoxFlat
 		if current_health > max_health * 0.6:
 			fill_style.bg_color = Color(0, 0.8, 0)

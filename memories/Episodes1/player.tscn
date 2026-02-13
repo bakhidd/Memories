@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://t78xt2ywn476" path="res://Scripts/Episode1Scripts/player.gd" id="1_v0nlj"]
 [ext_resource type="Texture2D" uid="uid://bali6c41ixgnb" path="res://Assets/Top_Down_Survivor/Top_Down_Survivor/rifle/idle/survivor-idle_rifle_0.png" id="2_v0nlj"]
+[ext_resource type="AudioStream" uid="uid://l8ttcpo66gv3" path="res://Sounds/Snake's Authentic Gun Sounds And More/Snake's Authentic Gun Sounds/Full Sound/5.56/WAV/556 Single WAV.wav" id="3_6ax6u"]
+[ext_resource type="AudioStream" uid="uid://dd1p3yeykvax0" path="res://Sounds/Free Footsteps Pack/Free Footsteps Pack/Sand.wav" id="4_retev"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0nlj"]
 radius = 20.0
@@ -20,3 +22,9 @@ position = Vector2(137.71698, 47.025303)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=966182914]
 position = Vector2(-15, 6)
 shape = SubResource("CircleShape2D_v0nlj")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=963650242]
+stream = ExtResource("3_6ax6u")
+
+[node name="StepSound" type="AudioStreamPlayer2D" parent="." unique_id=1461470617]
+stream = ExtResource("4_retev")

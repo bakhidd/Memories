@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hu7hljqwoosj" path="res://Scripts/Episode1Scripts/enemy_general.gd" id="1_7xwla"]
 [ext_resource type="Texture2D" uid="uid://dm4b85rwggfhg" path="res://Assets/survivor character v4.2 spritesheet.png" id="1_t84ph"]
+[ext_resource type="AudioStream" uid="uid://00yqjodlfeja" path="res://Sounds/Snake's Authentic Gun Sounds And More/Snake's Authentic Gun Sounds/Isolated/5.56/WAV/556 Single Isolated WAV.wav" id="3_o1get"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xwla"]
 radius = 20.024984
@@ -11,6 +12,7 @@ script = ExtResource("1_7xwla")
 speed = 120.0
 fire_rate = 0.6
 bullet_speed = 450.0
+bullet_damage = 5
 spread = 0.08
 burst_delay = 0.01
 
@@ -26,3 +28,6 @@ region_rect = Rect2(66.52668, 10.8077755, 59.381187, 53.5879)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=150423951]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_7xwla")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1353834570]
+stream = ExtResource("3_o1get")

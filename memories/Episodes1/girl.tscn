@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://ufa5pod57lyo" path="res://Assets/Me.png" id="1_bl817"]
 [ext_resource type="Script" uid="uid://bfrhdf25y6akb" path="res://Scripts/Episode1Scripts/girl.gd" id="1_vijq5"]
+[ext_resource type="AudioStream" uid="uid://dtpkmbrl8fddg" path="res://Sounds/throwing-flashbang-sound-effect-cs-go.mp3" id="3_lqt53"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vijq5"]
-radius = 88.0
+radius = 68.0
 
 [node name="Girl" type="Area2D" unique_id=1009072995]
 process_mode = 3
@@ -65,5 +66,8 @@ offset_top = 530.0
 offset_right = 1143.0
 offset_bottom = 605.0
 scale = Vector2(0.9600003, 1)
+
+[node name="FlashangSound" type="AudioStreamPlayer2D" parent="." unique_id=1227399690]
+stream = ExtResource("3_lqt53")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
