@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b270a2rw61c0m"]
 
 [ext_resource type="Script" uid="uid://diicc5dw001du" path="res://Scripts/MenusScripts/StartMenu.gd" id="1_xmy5p"]
+[ext_resource type="Texture2D" uid="uid://bjgdvxndnpyn7" path="res://Assets/gui/PNG/Loading Screen/Background.png" id="2_47ogf"]
+[ext_resource type="Texture2D" uid="uid://c3adcqsiovb72" path="res://Assets/gui/PNG/Main menu/Button BG.png" id="3_hiy0c"]
 
 [node name="StartMenu" type="Control" unique_id=1975080908]
 layout_mode = 3
@@ -11,12 +13,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xmy5p")
 
+[node name="Background" type="Sprite2D" parent="." unique_id=671262800]
+position = Vector2(576, 327)
+scale = Vector2(1.8694445, 1.8694445)
+texture = ExtResource("2_47ogf")
+
 [node name="Label" type="Label" parent="." unique_id=1661854169]
 layout_mode = 0
-offset_left = 445.0
-offset_top = 55.0
-offset_right = 757.0
-offset_bottom = 103.0
+offset_left = 443.0
+offset_top = 48.0
+offset_right = 755.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 46
 text = "Episodes"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -24,10 +32,13 @@ vertical_alignment = 1
 [node name="Ep1Button" type="Button" parent="." unique_id=1378147140]
 layout_mode = 0
 offset_left = 462.0
-offset_top = 123.0
+offset_top = 154.0
 offset_right = 746.0
-offset_bottom = 179.0
+offset_bottom = 210.0
 text = "Episode 1"
+icon = ExtResource("3_hiy0c")
+flat = true
+icon_alignment = 1
 
 [node name="BackButton" type="Button" parent="." unique_id=388263025]
 layout_mode = 0
@@ -36,6 +47,9 @@ offset_top = 512.0
 offset_right = 709.0
 offset_bottom = 558.0
 text = "Back"
+icon = ExtResource("3_hiy0c")
+flat = true
+icon_alignment = 1
 
 [connection signal="pressed" from="Ep1Button" to="." method="_on_ep_1_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

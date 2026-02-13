@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cuwlb204ygt3w"]
 
 [ext_resource type="Script" uid="uid://b2nbgv37whj7v" path="res://Scripts/MenusScripts/PauseMenu.gd" id="1_6xxwp"]
+[ext_resource type="Texture2D" uid="uid://dbp1xtw7oj7bn" path="res://Assets/gui/PNG/Pause menu/BTN MENU.png" id="2_gadwm"]
 
 [node name="SettingsMenu" type="Control" unique_id=597736606]
 process_mode = 3
@@ -46,9 +47,15 @@ text = "Continue
 "
 
 [node name="ExitToMainMenuButton" type="Button" parent="VBoxContainer" unique_id=311748801]
+visible = false
 layout_mode = 2
-text = "Exit to Main Menu
+text = "
 "
+
+[node name="ExitToMainMenuButton2" type="TextureButton" parent="VBoxContainer" unique_id=1031305797]
+layout_mode = 2
+texture_normal = ExtResource("2_gadwm")
+stretch_mode = 3
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=283333107]
 layout_mode = 2
@@ -56,4 +63,5 @@ text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitToMainMenuButton" to="." method="_on_exit_to_main_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitToMainMenuButton2" to="." method="_on_exit_to_main_menu_button_2_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

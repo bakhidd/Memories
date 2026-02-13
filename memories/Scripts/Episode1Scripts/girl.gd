@@ -102,8 +102,7 @@ func start_outro():
 	dialog_box.visible = false 
 	
 	# ЗВУК: Сначала запускаем затухание
-	GlobalMusic.fade_out(1.5)
-	
+	GlobalMusic.fade_out(0.5) 
 	# Создаем черный фон
 	var black_out = ColorRect.new()
 	black_out.color = Color(0, 0, 0, 0)
@@ -122,7 +121,7 @@ func start_outro():
 	tween.tween_property(black_out, "color:a", 1.0, 2.0) 
 	
 	# ЗВУК: Пока экран темнеет, включаем музыку (с исправленным play_track она зазвучит!)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1.2).timeout
 	GlobalMusic.play_track("res://Sounds/music/GBEdited.wav")
 	
 	await tween.finished

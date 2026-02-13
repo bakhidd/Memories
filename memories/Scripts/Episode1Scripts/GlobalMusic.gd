@@ -11,13 +11,10 @@ func _ready():
 	player.process_mode = Node.PROCESS_MODE_ALWAYS 
 
 func play_track(path: String):
-	# <-- 2. Если идет затухание, убиваем его, чтобы оно не выключило музыку позже
-	if fade_tween and fade_tween.is_running():
-		fade_tween.kill()
-		
-	if not FileAccess.file_exists(path):
-		print("ОШИБКА: Файл не найден: ", path)
-		return
+	# УДАЛЯЕМ или КОММЕНТИРУЕМ эту проверку, она мешает в билде!
+	# if not FileAccess.file_exists(path):
+	# 	print("ОШИБКА: Файл не найден: ", path)
+	# 	return
 
 	player.volume_db = 0 
 	
@@ -25,7 +22,13 @@ func play_track(path: String):
 		if not player.playing: player.play()
 		return
 	
-	player.stream = load(path)
+	# Пытаемся загрузить. Если файла нет, load вернет null, и игра не упадет
+	var new_stream = load(path)
+	if new_stream == null:
+		print("Не удалось загрузить музыку: ", path)
+		return
+
+	player.stream = new_stream
 	player.play()
 
 func fade_out(duration: float = 1.5):
