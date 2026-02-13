@@ -1,5 +1,8 @@
 extends Node
 
+func _ready():
+	# Заменяй путь на свой основной трек
+	GlobalMusic.play_track("res://Sounds/music/CSAmbient.mp3")
 
 func _on_start_game_button_pressed() -> void:
 	get_tree().change_scene_to_file('res://MenusScenes/StartMenu.tscn')

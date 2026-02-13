@@ -5,6 +5,7 @@ extends Area2D
 @onready var dialog_label = $CanvasLayer/Label# Текст
 @onready var flash_sound = $FlashangSound
 var active = false # Флаг: идет ли сейчас катсцена
+var final_label_ref: Label
 
 var dialogue = [
 	"Her: WOW... Did you just flash me AGAIN?",
@@ -78,13 +79,15 @@ func _input(event):
 			if typing_tween and typing_tween.is_running():
 				typing_tween.kill()
 			
-			# Устанавливаем текст полностью в зависимости от фазы
+			# Устанавливаем текст полностью
 			if is_final_phase:
-				$CanvasLayer/FinalLabel.visible_ratio = 1.0
+				# ИСПРАВЛЕНИЕ: Используем переменную-ссылку, а не путь
+				if is_instance_valid(final_label_ref):
+					final_label_ref.visible_ratio = 1.0
 			else:
 				dialog_label.visible_ratio = 1.0
 			
-				is_typing = false 
+			is_typing = false 
 		else:
 			if is_final_phase:
 				final_line_index += 1
@@ -94,51 +97,52 @@ func _input(event):
 				show_next_line()
 
 func start_outro():
-	is_final_phase = true # Переходим в финальную фазу
-	active = true         # Снова разрешаем ввод
+	is_final_phase = true
+	active = true
 	dialog_box.visible = false 
-
-	# Создаем черный экран
+	
+	# ЗВУК: Сначала запускаем затухание
+	GlobalMusic.fade_out(1.5)
+	
+	# Создаем черный фон
 	var black_out = ColorRect.new()
 	black_out.color = Color(0, 0, 0, 0)
 	black_out.set_anchors_preset(Control.PRESET_FULL_RECT)
 	$CanvasLayer.add_child(black_out)
 	
-	# Создаем метку для финального текста
-	var final_label = Label.new()
-	final_label.name = "FinalLabel"
-
-	# Растягиваем контейнер текста на всё окно
-	final_label.set_anchors_preset(Control.PRESET_FULL_RECT) 
-
-	# Центрируем текст внутри этого контейнера
-	final_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	final_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-
-	# Чтобы текст не вылезал за границы при узком окне
-	final_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	$CanvasLayer.add_child(final_label)
+	# Создаем текст и сохраняем ССЫЛКУ на него
+	final_label_ref = Label.new()
+	final_label_ref.set_anchors_preset(Control.PRESET_FULL_RECT) 
+	final_label_ref.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	final_label_ref.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	final_label_ref.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	$CanvasLayer.add_child(final_label_ref) # Добавляем в дерево
 	
-	# Затемнение экрана
 	var tween = create_tween()
 	tween.tween_property(black_out, "color:a", 1.0, 2.0) 
-	await tween.finished
 	
+	# ЗВУК: Пока экран темнеет, включаем музыку (с исправленным play_track она зазвучит!)
+	await get_tree().create_timer(1.0).timeout
+	GlobalMusic.play_track("res://Sounds/music/GBEdited.wav")
+	
+	await tween.finished
 	show_final_line()
 
 func show_final_line():
-	var label = $CanvasLayer/FinalLabel
+	# Используем сохраненную ссылку вместо поиска по пути $CanvasLayer/...
+	if not is_instance_valid(final_label_ref): 
+		return
+
 	if final_line_index < final_dialogue.size():
 		is_typing = true
-		label.text = final_dialogue[final_line_index]
-		label.visible_ratio = 0.0
+		final_label_ref.text = final_dialogue[final_line_index]
+		final_label_ref.visible_ratio = 0.0
 		
 		var duration = final_dialogue[final_line_index].length() * 0.05
 		typing_tween = create_tween()
-		typing_tween.tween_property(label, "visible_ratio", 1.0, duration)
+		typing_tween.tween_property(final_label_ref, "visible_ratio", 1.0, duration)
 		
 		await typing_tween.finished
 		is_typing = false
 	else:
-		# Если текст закончился, по следующему нажатию выходим
 		get_tree().change_scene_to_file("res://MenusScenes/StartMenu.tscn")

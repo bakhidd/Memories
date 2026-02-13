@@ -15,9 +15,12 @@ run/main_scene="uid://c4bra54ckncn4"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalMusic="*uid://bqxyj1jm0eu66"
+
 [display]
 
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
